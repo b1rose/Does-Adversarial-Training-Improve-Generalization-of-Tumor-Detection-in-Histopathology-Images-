@@ -10,7 +10,6 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 import numpy as np
 import tensorflow.keras
 import glob
-from matplotlib import pyplot as plt
 import os
 import random
 from tensorflow.keras.models import Model
