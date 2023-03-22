@@ -1,24 +1,23 @@
-from tensorflow import keras
-from tensorflow.keras import backend as K
 import tensorflow as tf
-from tensorflow.keras.layers import Input, Dense, Conv2D, MaxPool2D, Flatten, Dropout, GlobalAveragePooling2D, BatchNormalization
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Dropout, Lambda
-from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.callbacks import ModelCheckpoint
 import numpy as np
 import tensorflow.keras
 import glob
 import os
 import random
+import pandas as pd
+from tensorflow import keras
+from tensorflow.keras import backend as K
+from tensorflow.keras.layers import Input, Dense, Conv2D, MaxPool2D, Flatten, Dropout, GlobalAveragePooling2D, BatchNormalization, Dropout, Lambda
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import *
 from skimage.io import imread
 from skimage.transform import resize
 from skimage.color import rgba2rgb
 from PIL import Image
-import pandas as pd
 from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.densenet import DenseNet121
 from tensorflow.keras.applications.densenet import preprocess_input
