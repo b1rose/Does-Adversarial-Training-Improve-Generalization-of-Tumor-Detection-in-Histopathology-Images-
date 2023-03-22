@@ -364,44 +364,6 @@ def measure_representation_shift_exp2_h5(num_samples, modelName, model_load_path
     print(modelName + " Has an representation shift with Hospital 3 data of: " + str(out_dist_shift_hospital3))
     print(modelName + " Has an representation shift with Hospital 5 data of: " + str(out_dist_shift_hospital4))
 
-data_frame = pd.read_csv('metadata.csv')
-
-hospital_1_data = data_frame[data_frame["center"] == 0]
-shuffled_hospital_1_data = hospital_1_data.sample(frac=1)
-hospital_1_data_training = shuffled_hospital_1_data.iloc[0:47549]
-hospital_1_data_validation = shuffled_hospital_1_data.iloc[47549:53492]
-hospital_1_data_test = shuffled_hospital_1_data.iloc[53492:59435]
-
-hospital_2_data = data_frame[data_frame["center"] == 1]
-shuffled_hospital_2_data = hospital_2_data.sample(frac=1)
-
-hospital_3_data = data_frame[data_frame["center"] == 2]
-shuffled_hospital_3_data = hospital_3_data.sample(frac=1)
-
-hospital_4_data = data_frame[data_frame["center"] == 3]
-shuffled_hospital_4_data = hospital_4_data.sample(frac=1)
-hospital_4_data_training = shuffled_hospital_4_data.iloc[0:103871]
-hospital_4_data_validation = shuffled_hospital_4_data.iloc[103871:129838]
-
-hospital_5_data = data_frame[data_frame["center"] == 4]
-shuffled_hospital_5_data = hospital_5_data.sample(frac=1)
-
-hospital_5_data_training = shuffled_hospital_5_data.iloc[0:117378]
-hospital_5_data_validation = shuffled_hospital_5_data.iloc[117378:146722]
-
-#To run original experiment from WILDs Benchmark paper:
-training_data = data_frame[(data_frame["center"] == 0) | (data_frame["center"] == 1) | (data_frame["center"] == 2)]
-shuffled_training_data = training_data.sample(frac=1)
-shuffled_training_data_1 = shuffled_training_data.iloc[0:89697]
-shuffled_training_data_2 = shuffled_training_data.iloc[89697:179393]
-
-validation_data = data_frame[data_frame["center"] == 3]
-shuffled_validation_data = validation_data.sample(frac=1)
-
-test_data = data_frame[data_frame["center"] == 4]
-shuffled_test_data = test_data.sample(frac=1)
-
-
 def run_experiment_1_standard(batch_size, model_name, training_data, validation_data, test_data):
 
     for i in range(1,11):
@@ -690,6 +652,44 @@ def run_experiment_2_noise_h5(batch_size, model_name, hospital_5_data, hospital_
         model_load_path = 'models/' + model_name + str(i) + '.hdf5'
         measure_representation_shift_exp2_h5(1000, model_name + str(i), model_load_path, hospital_5_data_training, hospital_5_data_validation, hospital_1_data, hospital_2_data, hospital_3_data, hospital_4_data)
 
+   
+data_frame = pd.read_csv('metadata.csv')
+
+hospital_1_data = data_frame[data_frame["center"] == 0]
+shuffled_hospital_1_data = hospital_1_data.sample(frac=1)
+hospital_1_data_training = shuffled_hospital_1_data.iloc[0:47549]
+hospital_1_data_validation = shuffled_hospital_1_data.iloc[47549:53492]
+hospital_1_data_test = shuffled_hospital_1_data.iloc[53492:59435]
+
+hospital_2_data = data_frame[data_frame["center"] == 1]
+shuffled_hospital_2_data = hospital_2_data.sample(frac=1)
+
+hospital_3_data = data_frame[data_frame["center"] == 2]
+shuffled_hospital_3_data = hospital_3_data.sample(frac=1)
+
+hospital_4_data = data_frame[data_frame["center"] == 3]
+shuffled_hospital_4_data = hospital_4_data.sample(frac=1)
+hospital_4_data_training = shuffled_hospital_4_data.iloc[0:103871]
+hospital_4_data_validation = shuffled_hospital_4_data.iloc[103871:129838]
+
+hospital_5_data = data_frame[data_frame["center"] == 4]
+shuffled_hospital_5_data = hospital_5_data.sample(frac=1)
+
+hospital_5_data_training = shuffled_hospital_5_data.iloc[0:117378]
+hospital_5_data_validation = shuffled_hospital_5_data.iloc[117378:146722]
+
+#To run original experiment from WILDs Benchmark paper:
+training_data = data_frame[(data_frame["center"] == 0) | (data_frame["center"] == 1) | (data_frame["center"] == 2)]
+shuffled_training_data = training_data.sample(frac=1)
+shuffled_training_data_1 = shuffled_training_data.iloc[0:89697]
+shuffled_training_data_2 = shuffled_training_data.iloc[89697:179393]
+
+validation_data = data_frame[data_frame["center"] == 3]
+shuffled_validation_data = validation_data.sample(frac=1)
+
+test_data = data_frame[data_frame["center"] == 4]
+shuffled_test_data = test_data.sample(frac=1)        
+        
 run_experiment_1_standard(32, "std_trained_hospital123_", training_data, validation_data, test_data)
 run_experiment_1_adversarial(32, "adv_trained_hospital123_", training_data, validation_data, test_data)
 run_experiment_1_noise(32, "noise_trained_hospital123_", training_data, validation_data, test_data)
